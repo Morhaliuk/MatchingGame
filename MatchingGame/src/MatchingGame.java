@@ -1,11 +1,14 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class MatchingGame {
+    private GameMap gameMap = null;
     private final ArrayList<String> data = new ArrayList<>();
     private Level level = null;
+    private int lives = 0;
     public MatchingGame() {
         String filepath = System.getProperty("user.dir")
                 + "\\src\\data\\Words.txt";
@@ -28,6 +31,7 @@ public class MatchingGame {
 
     public void run() {
         chooseLevel();
+        prepareData();
     }
 
     private void chooseLevel() {
@@ -40,5 +44,18 @@ public class MatchingGame {
                 default -> System.out.println("There is no such level, try again");
             }
         } while (level == null);
+    }
+
+    private void prepareData() {
+        Collections.shuffle(data);
+        if (level == Level.EASY) {
+            setSettings(10, 4);
+        } else {
+            setSettings(15, 8);
+        }
+    }
+    private void setSettings(int livesNum, int mapSize) {
+        lives = livesNum;
+        gameMap = new GameMap(data.stream().limit(mapSize).toArray(String[]::new));
     }
 }
