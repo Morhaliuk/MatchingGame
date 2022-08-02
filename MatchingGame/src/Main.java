@@ -1,24 +1,25 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
+    private static String restartAnswer = "N";
     public static void main(String[] args) {
-        String filepath = System.getProperty("user.dir")
-                + "\\src\\data\\Words.txt";
-        ArrayList<String> data = new ArrayList<>();
-        try {
-            File myObj = new File(filepath);
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                data.add(myReader.nextLine());
+        MatchingGame game = new MatchingGame();
+        do {
+            game.run();
+            prompt();
+        } while (restartAnswer.equals("Y"));
+    }
+
+    private static void prompt() {
+        System.out.println("Restart game? Y/N");
+        Scanner scanner = new Scanner(System.in);
+        do{
+            restartAnswer = scanner.nextLine();
+            switch (restartAnswer) {
+                case "y", "Y" -> restartAnswer = "Y";
+                case "n", "N" -> restartAnswer = "N";
+                default -> System.out.println("Provide correct answer!");
             }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        data.forEach(System.out::println);
+        } while (!restartAnswer.equals("Y") && !restartAnswer.equals("N"));
     }
 }
