@@ -57,4 +57,36 @@ public class GameMap {
             System.out.println();
         }
     }
+
+    public String update(int i, int j){
+        map.get(i).set(j, answers.get(i).get(j));
+        return answers.get(i).get(j);
+    }
+
+    public void cancelChoice(String word){
+        for (List<String> strings : map) {
+            for (int j = 0; j < strings.size(); j++) {
+                if (strings.get(j).equals(word)) {
+                    strings.set(j, "X");
+                }
+            }
+        }
+    }
+
+    public boolean isAllUncovered(){
+        boolean allUncovered = true;
+        for (List<String> strings : map) {
+            for (int j = 0; j < strings.size(); j++) {
+                if (strings.get(j).equals("X")){
+                    allUncovered = false;
+                    break;
+                }
+            }
+        }
+        return allUncovered;
+    }
+
+    public int getColumnsNumber(){
+        return map.get(0).size();
+    }
 }
