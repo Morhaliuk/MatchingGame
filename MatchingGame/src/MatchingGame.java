@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class MatchingGame {
     private final ArrayList<String> data = new ArrayList<>();
+    private Level level = null;
     public MatchingGame() {
         String filepath = System.getProperty("user.dir")
                 + "\\src\\data\\Words.txt";
@@ -26,6 +27,18 @@ public class MatchingGame {
     }
 
     public void run() {
-        System.out.println("Game Run");
+        chooseLevel();
+    }
+
+    private void chooseLevel() {
+        Scanner scanner = new Scanner(System.in);
+        do {
+            System.out.println("Choose your level: [0] - Easy, [1] - Hard");
+            switch (scanner.nextInt()) {
+                case 0 -> level = Level.EASY;
+                case 1 -> level = Level.HARD;
+                default -> System.out.println("There is no such level, try again");
+            }
+        } while (level == null);
     }
 }
