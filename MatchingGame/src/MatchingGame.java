@@ -13,7 +13,7 @@ public class MatchingGame {
     private int choiceCol = -1;
     public MatchingGame() {
         String filepath = System.getProperty("user.dir")
-                + "\\src\\data\\Words.txt";
+                + "\\MatchingGame\\src\\data\\Words.txt";
         loadData(filepath);
         System.out.println("Welcome to the Matching game!!!");
     }
